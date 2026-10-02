@@ -1,0 +1,25 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Ficha do aluno | Instrutor de trânsito{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+</head>
+<body>
+  <main>
+    {% if user.is_authenticated %}
+    <nav aria-label="Navegação principal">
+      <a href="{% url 'index' %}">Cadastrar aluno</a>
+      <a href="{% url 'alunos' %}">Lista de alunos</a>
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Sair</button>
+      </form>
+    </nav>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

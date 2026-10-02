@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Ficha do aluno</h1>
+<p>Preencha os dados do aluno e da aula. Depois, confira as informações e baixe o PDF.</p>
+<p>Os campos marcados com * são obrigatórios.</p>
+<form method="post">
+  {% csrf_token %}
+  {% if form.errors %}<p class="erro" role="alert">Confira os campos indicados abaixo.</p>{% endif %}
+  {{ form.non_field_errors }}
+  {% for campo in form %}
+    {% if campo.name == 'nome' %}<fieldset><legend>Dados do aluno</legend>{% endif %}
+    {% if campo.name == 'instrutor' %}</fieldset><fieldset><legend>Instrutor e aula</legend>{% endif %}
+    {% if campo.name == 'conteudo' %}</fieldset><fieldset><legend>Acompanhamento do aluno</legend>{% endif %}
+    <div class="campo">
+      <label for="{{ campo.id_for_label }}">{{ campo.label }}{% if campo.field.required %} *{% endif %}</label>
+      {{ campo }}
+      {{ campo.errors }}
+    </div>
+  {% endfor %}
+  </fieldset>
+  <button type="submit">Salvar cadastro</button>
+</form>
+{% endblock %}

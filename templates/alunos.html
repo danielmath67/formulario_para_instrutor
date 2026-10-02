@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Lista de alunos | Instrutor de trânsito{% endblock %}
+{% block content %}
+<h1>Alunos cadastrados</h1>
+<p>Clique no nome para consultar a ficha do aluno.</p>
+{% if alunos %}
+<ul class="lista-alunos">
+  {% for aluno in alunos %}
+  <li>
+    <div>
+      <a class="nome-aluno" href="{% url 'relatorio' aluno.pk %}">{{ aluno.nome }}</a>
+      <small>Categoria {{ aluno.get_categoria_display }} · Aula: {{ aluno.data_aula|date:'d/m/Y' }}</small>
+    </div>
+    <a class="botao" href="{% url 'relatorio_pdf' aluno.pk %}" aria-label="Baixar PDF de {{ aluno.nome }}">Baixar PDF</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Nenhum aluno cadastrado ainda.</p>
+{% endif %}
+<p><a href="{% url 'index' %}">Cadastrar aluno</a></p>
+{% endblock %}

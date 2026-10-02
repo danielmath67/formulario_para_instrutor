@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Login do instrutor{% endblock %}
+{% block content %}
+<h1>Login do instrutor</h1>
+<form method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+  {% if form.errors %}
+    <p class="erro" role="alert">Usuário ou senha incorretos.</p>
+  {% endif %}
+  <div class="campo">
+    <label for="id_username">Usuário</label>
+    {{ form.username }}
+  </div>
+  <div class="campo">
+    <label for="id_password">Senha</label>
+    {{ form.password }}
+  </div>
+  <input type="hidden" name="next" value="{{ next }}">
+  <button type="submit">Entrar</button>
+</form>
+{% endblock %}

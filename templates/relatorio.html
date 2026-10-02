@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Ficha de {{ relatorio.nome }}{% endblock %}
+{% block content %}
+<h1>{{ relatorio.nome }}</h1>
+<p>Ficha do aluno e informações da aula.</p>
+<dl>
+{% for rotulo, valor in campos %}
+  <dt>{{ rotulo }}</dt>
+  <dd>{{ valor|linebreaksbr }}</dd>
+{% endfor %}
+</dl>
+<p><a class="botao" href="{% url 'relatorio_pdf' relatorio.pk %}">Baixar PDF</a></p>
+<p><a href="{% url 'alunos' %}">Voltar à lista de alunos</a></p>
+<p><a href="{% url 'index' %}">Cadastrar outro aluno</a></p>
+{% endblock %}
