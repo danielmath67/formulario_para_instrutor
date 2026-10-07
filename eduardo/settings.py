@@ -145,3 +145,6 @@ if not DEBUG and os.environ.get('DJANGO_HTTPS', '1') == '1':
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'alunos'
 LOGOUT_REDIRECT_URL = 'login'
+CSRF_TRUSTED_ORIGINS = [
+    "https://web-production-d141c.up.railway.app",
+]
